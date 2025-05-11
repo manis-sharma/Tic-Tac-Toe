@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Roboto&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Roboto&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -114,5 +114,148 @@ nav ul{
     .container { 
         grid-template-rows: repeat(3, 20vw);
         grid-template-columns: repeat(3, 20vw);
+    }
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f0e7ff, #e6f2ff);
+    color: #333;
+    min-height: 100vh;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #1a001f;
+    color: white;
+    height: 65px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Game Layout */
+.gameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Game Grid */
+.container {
+    display: grid;
+    grid-template-rows: repeat(3, 10vw);
+    grid-template-columns: repeat(3, 10vw);
+    position: relative;
+    background-color: #ffffffcc;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Grid Box */
+.box {
+    border: 2px solid #333;
+    font-size: 7.5vw;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.box:hover {
+    background-color: #efe9ff;
+    transform: scale(1.05);
+}
+
+/* Info Panel */
+.gameInfo {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 25px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    min-width: 260px;
+    text-align: center;
+}
+
+.gameInfo h1 {
+    font-size: 2.5rem;
+    color: #3c1361;
+    margin-bottom: 20px;
+}
+
+.info {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Reset Button */
+#reset {
+    padding: 8px 20px;
+    background: #d3b6ff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    color: #3c1361;
+    transition: background 0.3s;
+}
+
+#reset:hover {
+    background: #c29dff;
+}
+
+/* Drop-down */
+select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+}
+
+/* Winning Line */
+.line {
+    background-color: #8b1ef9;
+    height: 3px;
+    width: 0;
+    position: absolute;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Media Query */
+@media screen and (max-width: 950px) {
+    .gameContainer {
+        flex-direction: column;
+    }
+
+    .container {
+        grid-template-rows: repeat(3, 20vw);
+        grid-template-columns: repeat(3, 20vw);
+    }
+
+    .gameInfo {
+        margin-top: 30px;
+    }
+
+    .gameInfo h1 {
+        font-size: 2rem;
     }
 }

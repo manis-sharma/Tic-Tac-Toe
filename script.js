@@ -4,6 +4,9 @@ let music = new Audio("music.mp3");
 let audioTurn = new Audio("ting.mp3");
 let gameover = new Audio("gameover.mp3");
 
+music.loop = true; // Makes the music play continuously
+music.volume = 0.5; // Sets the volume to 50%
+
 let turn = "X";
 let isgameover = false;
 let isAgainstBot = true;
@@ -37,11 +40,30 @@ const checkWin = () => {
     ) {
       document.querySelector(".info").innerText = boxtext[e[0]].innerText + " Won";
       isgameover = true;
+      gameover.play();
       document.querySelector(".imgbox img").style.width = "200px";
       document.querySelector(".line").style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`;
       document.querySelector(".line").style.width = "20vw";
+      
+      // Add auto-reset after 3 seconds
+      setTimeout(() => {
+        resetGame();
+      }, 3000);
     }
   });
+
+  // Check for draw
+  const allBoxesFilled = Array.from(boxtext).every(box => box.innerText !== '');
+  if (allBoxesFilled && !isgameover) {
+    document.querySelector(".info").innerText = "Game Draw!";
+    isgameover = true;
+    gameover.play();
+    
+    // Add auto-reset for draw after 3 seconds
+    setTimeout(() => {
+      resetGame();
+    }, 3000);
+  }
 };
 
 // Bot move logic
@@ -210,15 +232,12 @@ Array.from(boxes).forEach((element) => {
   });
 });
 
-// Add onclick listener to reset button
-reset.addEventListener("click", () => {
-  let boxtexts = document.querySelectorAll(".boxtext");
-  Array.from(boxtexts).forEach((element) => {
-    element.innerText = "";
-  });
-  turn = "X";
-  isgameover = false;
-  document.querySelector(".line").style.width = "0vw";
-  document.querySelector(".info").innerText = "Turn for " + turn;
-  document.querySelector(".imgbox img").style.width = "0px";
-});
+// Add this function to start music
+function startBackgroundMusic() {
+    music.play().catch(error => {
+        console.log("Audio play failed:", error);
+    });
+}
+
+// Call this when the page loads
+window.addEventListener('load', startBackgroundMusic);
